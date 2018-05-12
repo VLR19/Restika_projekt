@@ -2,11 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: Валерий
- * Date: 12.05.2018
- * Time: 22:48
+ * Date: 13.05.2018
+ * Time: 0:28
  */
 
-class Rezervacia_model extends CI_Model
+class Objednavky_model extends CI_Model
 {
 
     public function __construct() { }
@@ -16,12 +16,12 @@ class Rezervacia_model extends CI_Model
     function getRows($id = "")
     {
         if (!empty($id)) {
-            $this->db->select('idRezervacia, Datum, Pocet_hosti, Typ_akcii, Pocet_stolov');
-            $query = $this->db->get_where('rezervacia', array('idRezervacia' => $id));
+            $this->db->select('idObjednavky, Datum_objednavky, Suma');
+            $query = $this->db->get_where('objednavky', array('idObjednavky' => $id));
             return $query->row_array();
         } else {
-            $this->db->select('idRezervacia, Datum, Pocet_hosti, Typ_akcii, Pocet_stolov');
-            $query = $this->db->get('rezervacia');
+            $this->db->select('idObjednavky, Datum_objednavky, Suma');
+            $query = $this->db->get('objednavky');
             return $query->result_array();
         }
     }
@@ -30,7 +30,7 @@ class Rezervacia_model extends CI_Model
 
     // vlozenie zaznamu
     public function insert($data = array()) {
-        $insert = $this->db->insert('rezervacia', $data);
+        $insert = $this->db->insert('objednavky', $data);
         if($insert){
             return $this->db->insert_id();
         }else{
@@ -42,7 +42,7 @@ class Rezervacia_model extends CI_Model
     public function update($data, $id)
     {
         if (!empty($data) && !empty($id)) {
-            $update = $this->db->update('rezervacia', $data, array('idRezervacia' => $id));
+            $update = $this->db->update('objednavky', $data, array('idObjednavky' => $id));
             return $update ? true : false;
         } else {
             return false;
@@ -52,7 +52,7 @@ class Rezervacia_model extends CI_Model
     // odstranenie zaznamu
     public function delete($id)
     {
-        $delete = $this->db->delete('rezervacia', array('idRezervacia' => $id));
+        $delete = $this->db->delete('objednavky', array('idObjednavky' => $id));
         return $delete ? true : false;
     }
 }
