@@ -6,7 +6,7 @@
  * Time: 8:16
  */
 
-class Restika_model
+class Zakaznici_model
 {
     function getRows($id= "") {
         if(!empty($id)){
