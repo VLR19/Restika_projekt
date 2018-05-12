@@ -1,4 +1,4 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Created by PhpStorm.
  * User: Валерий
@@ -6,17 +6,27 @@
  * Time: 8:16
  */
 
-class Zakaznici_model
+class Zakaznici_model extends CI_Model
 {
-    function getRows($id= "") {
-        if(!empty($id)){
-            $query = $this->db->get_where('zakaznici', array('id' => $id));
+
+    public function __construct() { }
+
+
+
+    function getRows($id = "")
+    {
+        if (!empty($id)) {
+            $this->db->select('idZakaznici, Meno, Priezvisko, Telefon, Email');
+            $query = $this->db->get_where('zakaznici', array('idZakaznici' => $id));
             return $query->row_array();
-        }else{
+        } else {
+            $this->db->select('idZakaznici, Meno, Priezvisko, Telefon, Email');
             $query = $this->db->get('zakaznici');
             return $query->result_array();
         }
     }
+
+
 
     // vlozenie zaznamu
     public function insert($data = array()) {
@@ -29,20 +39,20 @@ class Zakaznici_model
     }
 
     // aktualizacia zaznamu
-    public function update($data, $id) {
-        if(!empty($data) && !empty($id)){
-            $update = $this->db->update('zakaznici', $data,
-                array('id'=>$id));
-            return $update?true:false;
-        }else{
+    public function update($data, $id)
+    {
+        if (!empty($data) && !empty($id)) {
+            $update = $this->db->update('zakaznici', $data, array('idZakaznici' => $id));
+            return $update ? true : false;
+        } else {
             return false;
         }
     }
 
     // odstranenie zaznamu
-    public function delete($id){
-        $delete = $this->db->delete('zakaznici',array('id'=>$id));
-        return $delete?true:false;
+    public function delete($id)
+    {
+        $delete = $this->db->delete('zakaznici', array('idZakaznici' => $id));
+        return $delete ? true : false;
     }
-
 }

@@ -29,7 +29,7 @@ class Zakaznici extends CI_Controller {
         $data['title'] = 'Zakaznici List';
         //nahratie zoznamu teplot
         $this->load->view('templates/header', $data);
-        $this->load->view('temperatures/index', $data);
+        $this->load->view('zakaznici/index', $data);
         $this->load->view('templates/footer');
     }
 
@@ -39,10 +39,10 @@ class Zakaznici extends CI_Controller {
         //kontrola, ci bolo zaslane id riadka
         if(!empty($id)){
             $data['zakaznici'] = $this->Zakaznici_model->getRows($id);
-            $data['title'] = $data['zakaznici']['measurement_date'];
+            $data['title'] = $data['zakaznici']['Meno'];
             //nahratie detailu zaznamu
             $this->load->view('templates/header', $data);
-            $this->load->view('temperatures/view', $data);
+            $this->load->view('zakaznici/view', $data);
             $this->load->view('templates/footer');
         }else{
             redirect('/zakaznici');
@@ -50,120 +50,80 @@ class Zakaznici extends CI_Controller {
     }
 
     // pridanie zaznamu
-    public function add(){
+    public function add()
+    {
         $data = array();
         $postData = array();
-        //zistenie, ci bola zaslana poziadavka na pridanie zaznamu
-        if($this->input->post('postSubmit')){
-            //definicia pravidiel validacie
-            $this->form_validation->set_rules('measurement_date', 'date of
-measurement', 'required');
-            $this->form_validation->set_rules('zakaznici', 'zakaznici',
-                'required');
-            $this->form_validation->set_rules('sky', 'sky value', 'required');
-            $this->form_validation->set_rules('user', 'user id', 'required');
-            //priprava dat pre vlozenie
+        if ($this->input->post('postSubmit')) {
+            $this->form_validation->set_rules('Meno', 'Meno zakaznika',  'required');
+            $this->form_validation->set_rules('Priezvisko', 'Priezvisko zakaznika', 'required');
+            $this->form_validation->set_rules('Telefon', 'Cislo telefonu zakaznika', 'required');
+            $this->form_validation->set_rules('Email', 'Email zakaznika', 'required|valid_email');
             $postData = array(
-                'measurement_date' => $this->input->post('measurement_date'),
-                'temperature' => $this->input->post('zakaznici'),
-                'sky' => $this->input->post('sky'),
-                'user' => $this->input->post('user'),
-                'description' => $this->input->post('description'),
+                'Meno' => $this->input->post('Meno'),
+                'Priezvisko' => $this->input->post('Priezvisko'),
+                'Telefon' => $this->input->post('Telefon'),
+                'Email' => $this->input->post('Email'),
             );
-            //validacia zaslanych dat
-            if($this->form_validation->run() == true){
-                //vlozenie dat
+            if ($this->form_validation->run() == true) {
                 $insert = $this->Zakaznici_model->insert($postData);
-                if($insert){
-                    $this->session->set_userdata('success_msg', 'Temperature
-has been added successfully.');
-                    redirect('/zakaznici');
-                }else{
-                    $data['error_msg'] = 'Some problems occurred, please try
-again.';
+                if ($insert) {
+                    $this->session->set_userdata('success_msg', 'Zakaznik bol pridaný.');
+                    redirect('zakaznici/');
+                } else {
+                    $data['error_msg'] = 'Chyba, skúste znovu.';
                 }
             }
         }
         $data['post'] = $postData;
-        $data['title'] = 'Create Temperature';
-
- $data['action'] = 'Add';
- //zobrazenie formulara pre vlozenie a editaciu dat
- $this->load->view('templates/header', $data);
- $this->load->view('temperatures/add-edit', $data);
- $this->load->view('templates/footer');
-}
-
-
-
-// aktualizacia dat
-    public function edit($id){
-        $data = array();
-        //ziskanie dat z tabulky
-        $postData = $this->Zakaznici_model->getRows($id);
-        //zistenie, ci bola zaslana poziadavka na aktualizaciu
-        if($this->input->post('postSubmit')){
-            //definicia pravidiel validacie
-            $this->form_validation->set_rules('measurement_date', 'date of
-measurement', 'required');
-            $this->form_validation->set_rules('temperature', 'temperature
-value', 'required');
-            $this->form_validation->set_rules('sky', 'sky value', 'required');
-            $this->form_validation->set_rules('user', 'user id', 'required');
-            // priprava dat pre aktualizaciu
-            $postData = array(
-                'measurement_date' => $this->input->post('measurement_date'),
-                'temperature' => $this->input->post('temperature'),
-                'sky' => $this->input->post('sky'),
-                'user' => $this->input->post('user'),
-                'description' => $this->input->post('description'),
-            );
-            //validacia zaslanych dat
-            if($this->form_validation->run() == true){
-                //aktualizacia dat
-                $update = $this->Zakaznici_model->update($postData, $id);
-                if($update){
-                    $this->session->set_userdata('success_msg', 'Temperature
-has been updated successfully.');
-
- redirect('/zakaznici');
- }else{
-                    $data['error_msg'] = 'Some problems occurred, please try
-again.';
-                }
-            }
-        }
-        $data['post'] = $postData;
-        $data['title'] = 'Update Temperature';
-        $data['action'] = 'Edit';
-        //zobrazenie formulara pre vlozenie a editaciu dat
+        $data['title'] = 'Pridaj zakaznika';
+        $data['action'] = 'Pridaj';
         $this->load->view('templates/header', $data);
-        $this->load->view('temperatures/add-edit', $data);
+        $this->load->view('zakaznici/add-edit', $data);
         $this->load->view('templates/footer');
     }
-
-
-
-    // odstranenie dat
-    public function delete($id){
-        //overenie, ci id nie je prazdne
-        if($id){
-            //odstranenie zaznamu
-            $delete = $this->Zakaznici_model->delete($id);
-            if($delete){
-                $this->session->set_userdata('success_msg', 'Temperature has
-been removed successfully.');
-            }else{
-                $this->session->set_userdata('error_msg', 'Some problems
-occurred, please try again.');
+    public function edit($id)
+    {
+        $data = array();
+        $postData = $this->Zakaznici_model->getRows($id);
+        if ($this->input->post('postSubmit')) {
+            $this->form_validation->set_rules('Meno', 'Meno zakaznika',  'required');
+            $this->form_validation->set_rules('Priezvisko', 'Priezvisko zakaznika', 'required');
+            $this->form_validation->set_rules('Telefon', 'Cislo telefonu zakaznika', 'required');
+            $this->form_validation->set_rules('Email', 'Email zakaznika', 'required|valid_email');
+            $postData = array(
+                'Meno' => $this->input->post('Meno'),
+                'Priezvisko' => $this->input->post('Priezvisko'),
+                'Telefon' => $this->input->post('Telefon'),
+                'Email' => $this->input->post('Email'),
+            );
+            if ($this->form_validation->run() == true) {
+                $update = $this->Zakaznici_model->update($postData, $id);
+                if ($update) {
+                    $this->session->set_userdata('success_msg', 'Zakaznik upravený.');
+                    redirect('zakaznici/');
+                } else {
+                    $data['error_msg'] = 'Chyba, skúste znovu.';
+                }
             }
         }
-        redirect('/zakaznici');
+        $data['post'] = $postData;
+        $data['title'] = 'Uprav zakaznika';
+        $data['action'] = 'Úprava';
+        $this->load->view('templates/header', $data);
+        $this->load->view('zakaznici/add-edit', $data);
+        $this->load->view('templates/footer');
     }
-
-
-
-
-
-
+    public function delete($id)
+    {
+        if ($id) {
+            $delete = $this->Zakaznici_model->delete($id);
+            if ($delete) {
+                $this->session->set_userdata('success_msg', 'Zakaznik bol odstránený.');
+            } else {
+                $this->session->set_userdata('error_msg', 'Chyba, skúste znovu.');
+            }
+        }
+        redirect('zakaznici/');
+    }
 }
