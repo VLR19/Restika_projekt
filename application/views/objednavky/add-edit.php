@@ -29,6 +29,11 @@
                             !empty($post['Suma'])?$post['Suma']:''; ?>">
                             <?php echo form_error('Suma','<p class="helpblock text-danger">','</p>'); ?>
                         </div>
+                        <div class="form-group">
+                            <?php echo form_label('Rezervacia'); ?>
+                            <?php echo form_dropdown('idRezervacia', $rezervacia, $rezervacia_selected, 'class="form-control"'); ?>
+                            <?php echo form_error('idRezervacia','<p class="helpblock text-danger">','</p>'); ?>
+                        </div>
                         <input type="submit" name="postSubmit" class="btn btn-primary" value="Potvrď"/>
                     </form>
                 </div>

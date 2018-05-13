@@ -30,8 +30,8 @@
                         <tr class="table-primary">
                             <th scope="row"><?php echo '#'.$druh_objednavky['idDruh_objednavky']; ?></th>
                             <td><?php echo $druh_objednavky['Mnozstvo']; ?></td>
-                            <td><?php echo $druh_objednavky['Potraviny']; ?></td>
-                            <td><?php echo $druh_objednavky['Objednavky'];?></td>
+                            <td><?php echo $druh_objednavky['Nazov potraviny']; ?></td>
+                            <td><?php echo $druh_objednavky['Suma objednavky'];?></td>
                             <td align="right">
                                 <a href="<?php echo site_url('druh_objednavky/view/'.$druh_objednavky['idDruh_objednavky']); ?>" class="glyphicon glyphicon-eye-open"></a>
                                 <a href="<?php echo site_url('druh_objednavky/edit/'.$druh_objednavky['idDruh_objednavky']); ?>" class="glyphicon glyphicon-edit"></a>

@@ -31,7 +31,7 @@
                             <th scope="row"><?php echo '#'.$objednavky['idObjednavky']; ?></th>
                             <td><?php echo $objednavky['Datum_objednavky']; ?></td>
                             <td><?php echo $objednavky['Suma']; ?></td>
-                            <td><?php echo $objednavky['Rezervacia'];?></td>
+                            <td><?php echo $objednavky['Nazov akcii'];?></td>
                             <td align="right">
                                 <a href="<?php echo site_url('objednavky/view/'.$objednavky['idObjednavky']); ?>" class="glyphicon glyphicon-eye-open"></a>
                                 <a href="<?php echo site_url('objednavky/edit/'.$objednavky['idObjednavky']); ?>" class="glyphicon glyphicon-edit"></a>

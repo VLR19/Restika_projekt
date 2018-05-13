@@ -16,6 +16,12 @@
                         !empty($objednavky['Suma'])?$objednavky['Suma']:'';
                         ?></p>
                 </div>
+                <div class="form-group">
+                    <label>Rezervacia:</label>
+                    <p><?php echo
+                        !empty($objednavky['Rezervacia'])?$objednavky['Rezervacia']:''; ?>
+                        <a href="<?php echo site_url('rezervacia/viewfest/'.$objednavky['idRezervacia']); ?>" class="glyphicon glyphicon-eye-open"></a></p>
+                </div>
             </div>
         </div>
     </div>

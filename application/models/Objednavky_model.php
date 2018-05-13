@@ -16,11 +16,13 @@ class Objednavky_model extends CI_Model
     function getRows($id = "")
     {
         if (!empty($id)) {
-            $this->db->select('idObjednavky, Datum_objednavky, Suma');
-            $query = $this->db->get_where('objednavky', array('idObjednavky' => $id));
+            $this->db->select('objednavky.idObjednavky, objednavky.Datum_objednavky, objednavky.Suma, rezervacia.Typ_akcii as Nazov akcii, rezervacia.idRezervacia as idRezervacia')
+                ->join('rezervacia','objednavky.Rezervacia_idRezervacia = rezervacia.idRezervacia');
+            $query = $this->db->get_where('objednavky', array('objednavky.idObjednavky' => $id));
             return $query->row_array();
         } else {
-            $this->db->select('idObjednavky, Datum_objednavky, Suma');
+            $this->db->select('objednavky.idObjednavky, objednavky.Datum_objednavky, objednavky.Suma, rezervacia.Typ_akcii as Nazov akcii, rezervacia.idRezervacia as idRezervacia')
+                ->join('rezervacia','objednavky.Rezervacia_idRezervacia = rezervacia.idRezervacia');
             $query = $this->db->get('objednavky');
             return $query->result_array();
         }

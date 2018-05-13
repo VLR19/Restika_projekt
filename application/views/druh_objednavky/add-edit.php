@@ -22,6 +22,16 @@
                             !empty($post['Mnozstvo'])?$post['Mnozstvo']:''; ?>">
                             <?php echo form_error('Mnozstvo','<p class="helpblock text-danger">','</p>'); ?>
                         </div>
+                        <div class="form-group">
+                            <?php echo form_label('Potraviny'); ?>
+                            <?php echo form_dropdown('idPotraviny', $potraviny, $potraviny_selected, 'class="form-control"'); ?>
+                            <?php echo form_error('idPotraviny','<p class="helpblock text-danger">','</p>'); ?>
+                        </div>
+                        <div class="form-group">
+                            <?php echo form_label('Objednavky'); ?>
+                            <?php echo form_dropdown('idObjednavky', $objednavky, $objednavky_selected, 'class="form-control"'); ?>
+                            <?php echo form_error('idObjednavky','<p class="helpblock text-danger">','</p>'); ?>
+                        </div>
                         <input type="submit" name="postSubmit" class="btn btn-primary" value="Potvrď"/>
                     </form>
                 </div>

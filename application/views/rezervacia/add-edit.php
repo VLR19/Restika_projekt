@@ -37,11 +37,16 @@
                             <?php echo form_error('Typ_akcii','<p class="helpblock text-danger">','</p>'); ?>
                         </div>
                         <div class="form-group">
-                            <label for="title">Pocet_stolov</label>
+                            <label for="title">Počet_stolov</label>
                             <input type="text" class="form-control"
                                    name="Pocet_stolov" placeholder="Vlož pocet stolov na akcii" value="<?php echo
                             !empty($post['Pocet_stolov'])?$post['Pocet_stolov']:''; ?>">
                             <?php echo form_error('Pocet_stolov','<p class="helpblock text-danger">','</p>'); ?>
+                        </div>
+                        <div class="form-group">
+                            <?php echo form_label('Zakaznik'); ?>
+                            <?php echo form_dropdown('idZakaznici', $zakaznici, $zakaznici_selected, 'class="form-control"'); ?>
+                            <?php echo form_error('idZakaznici','<p class="helpblock text-danger">','</p>'); ?>
                         </div>
                         <input type="submit" name="postSubmit" class="btn btn-primary" value="Potvrď"/>
                     </form>

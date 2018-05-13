@@ -26,6 +26,12 @@
                     <p><?php echo
                         !empty($rezervacia['Pocet_stolov'])?$rezervacia['Pocet_stolov']:''; ?></p>
                 </div>
+                <div class="form-group">
+                    <label>Zakaznik:</label>
+                    <p><?php echo
+                        !empty($rezervacia['Zakaznik'])?$rezervacia['Zakaznik']:''; ?>
+                        <a href="<?php echo site_url('zakaznici/viewfest/'.$rezervacia['idZakaznika']); ?>" class="glyphicon glyphicon-eye-open"></a></p>
+                </div>
             </div>
         </div>
     </div>

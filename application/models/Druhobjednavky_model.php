@@ -16,11 +16,15 @@ class Druhobjednavky_model extends CI_Model
     function getRows($id = "")
     {
         if (!empty($id)) {
-            $this->db->select('idDruh_objednavky, Mnozstvo');
+            $this->db->select('druh_objednavky.idDruh_objednavky, druh_objednavky.Mnozstvo, potraviny.Nazov as Nazov potraviny, potraviny.idPotraviny as idPotraviny, objednavky.Suma as Suma objednavky, objednavky.idObjednavky as idObjednavky')
+                ->join('potraviny','druh_objednavky.Potraviny_idPotraviny = potraviny.idPotraviny')
+                ->join('objednavky','druh_objednavky.Objednavky_idObjednavky = objednavky.idObjednavky');
             $query = $this->db->get_where('druh_objednavky', array('idDruh_objednavky' => $id));
             return $query->row_array();
         } else {
-            $this->db->select('idDruh_objednavky, Mnozstvo');
+            $this->db->select('druh_objednavky.idDruh_objednavky, druh_objednavky.Mnozstvo, potraviny.Nazov as Nazov potraviny, potraviny.idPotraviny as idPotraviny, objednavky.Suma as Suma objednavky, objednavky.idObjednavky as idObjednavky')
+                ->join('potraviny','druh_objednavky.Potraviny_idPotraviny = potraviny.idPotraviny')
+                ->join('objednavky','druh_objednavky.Objednavky_idObjednavky = objednavky.idObjednavky');
             $query = $this->db->get('druh_objednavky');
             return $query->result_array();
         }

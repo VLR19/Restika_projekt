@@ -35,7 +35,7 @@
                             <td><?php echo $rezervacia['Pocet_hosti']; ?></td>
                             <td><?php echo $rezervacia['Typ_akcii'];?></td>
                             <td><?php echo $rezervacia['Pocet_stolov'];?></td>
-                            <td><?php echo $rezervacia['Zakaznici'];?></td>
+                            <td><?php echo $rezervacia['Zakaznik'];?></td>
                             <td align="right">
                                 <a href="<?php echo site_url('rezervacia/view/'.$rezervacia['idRezervacia']); ?>" class="glyphicon glyphicon-eye-open"></a>
                                 <a href="<?php echo site_url('rezervacia/edit/'.$rezervacia['idRezervacia']); ?>" class="glyphicon glyphicon-edit"></a>

@@ -16,11 +16,13 @@ class Rezervacia_model extends CI_Model
     function getRows($id = "")
     {
         if (!empty($id)) {
-            $this->db->select('idRezervacia, Datum, Pocet_hosti, Typ_akcii, Pocet_stolov');
-            $query = $this->db->get_where('rezervacia', array('idRezervacia' => $id));
+            $this->db->select('rezervacia.idRezervacia, rezervacia.Datum, rezervacia.Pocet_hosti, rezervacia.Typ_akcii, rezervacia.Pocet_stolov, zakaznici.Meno as Zakaznik ,zakaznici.idZakaznici as idZakaznika')
+                ->join('zakaznici','rezervacia.Zakaznici_idZakaznici = zakaznici.idZakaznici');
+            $query = $this->db->get_where('rezervacia', array('rezervacia.idRezervacia' => $id));
             return $query->row_array();
         } else {
-            $this->db->select('idRezervacia, Datum, Pocet_hosti, Typ_akcii, Pocet_stolov');
+            $this->db->select('rezervacia.idRezervacia, rezervacia.Datum, rezervacia.Pocet_hosti, rezervacia.Typ_akcii, rezervacia.Pocet_stolov, zakaznici.Meno as Zakaznik ,zakaznici.idZakaznici as idZakaznika')
+                ->join('zakaznici','rezervacia.Zakaznici_idZakaznici = zakaznici.idZakaznici');
             $query = $this->db->get('rezervacia');
             return $query->result_array();
         }
