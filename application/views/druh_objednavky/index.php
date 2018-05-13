@@ -39,7 +39,7 @@
                             </td>
                         </tr>
                     <?php endforeach; else: ?>
-                        <tr><td colspan="4">Žiadne rezervacii neboli nájdení.....</td></tr>
+                        <tr><td colspan="4">Žiadne druhy objednavok neboli nájdení.....</td></tr>
                     <?php endif; ?>
                     </tbody>
                 </table>
