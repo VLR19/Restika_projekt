@@ -27,7 +27,7 @@ class Zakaznici extends CI_Controller {
         }
         $data['zakaznici'] = $this->Zakaznici_model->getRows();
         $data['title'] = 'Zakaznici List';
-        //nahratie zoznamu teplot
+
         $this->load->view('templates/header', $data);
         $this->load->view('zakaznici/index', $data);
         $this->load->view('templates/footer');
