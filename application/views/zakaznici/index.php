@@ -49,4 +49,31 @@
         </div>
     </div>
 </div>
+<script>
+    var jsonfile = {
+        "jsonarray": <?php echo $json_zakaznici;?>
+    };
+    var labels = jsonfile.jsonarray.map(function(e) {
+        return e.fullname;
+    });
+    var data = jsonfile.jsonarray.map(function(e) {
+        return e.pocet;
+    });;
+    var ctx = zakazgraph.getContext('2d');
+    var config = {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Graph Line',
+                data: data,
+                backgroundColor: ["#b28930","#7FDBFF","#36ffa6","#d9d200","#0074D9","#d90007", "#2ECC40", "#FF851B",
+                    "#1bfff7","#ff4136", "#B10DC9", "#FFDC00", "#3690ff", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
+                borderColor:'rgba(50,50,50,50)',
+                borderWidth: 1
+            }]
+        }
+    };
+    var chart = new Chart(ctx, config);
+</script>
 

@@ -60,12 +60,12 @@
         "jsonarray": <?php echo $json_objednavky;?>
     };
     var labels = jsonfile.jsonarray.map(function(e) {
-        return e.fullname;
+        return e.celkova_platba;
     });
     var data = jsonfile.jsonarray.map(function(e) {
         return e.pocet;
     });;
-    var ctx = manazergraph.getContext('2d');
+    var ctx = obgraph.getContext('2d');
     var config = {
         type: 'pie',
         data: {

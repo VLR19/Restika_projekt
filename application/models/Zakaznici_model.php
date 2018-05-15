@@ -55,4 +55,15 @@ class Zakaznici_model extends CI_Model
         $delete = $this->db->delete('zakaznici', array('idZakaznici' => $id));
         return $delete ? true : false;
     }
+
+    public function record_zakaznici_array() {
+        $this->db->select('concat(zakaznici.Meno," ",zakaznici.Priezvisko) as fullname, count(rezervacia.Zakaznici_idZakaznici) as pocet')
+            ->join('zakaznici','zakaznici.idZakaznici = rezervacia.Zakaznici_idZakaznici');
+        $this->db->group_by('rezervacia.Zakaznici_idZakaznici');
+        $this->db->from('rezervacia');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 }
+?>

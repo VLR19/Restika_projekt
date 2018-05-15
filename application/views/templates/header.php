@@ -3,21 +3,31 @@
 <head>
     <meta charset="utf-8">
     <title><?php echo $title; ?></title>
+    <link rel="stylesheet" type="text/css" href=https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css>
+    <link rel="stylesheet" type="text/css" href=https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css>
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+
+    <script type="text/javascript" src=https://code.jquery.com/jquery-1.12.4.js></script>
+    <script type="text/javascript" src=https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js></script>
+    <script type="text/javascript" src=https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js></script>
+    <script type="text/javascript" src=https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js></script>
+    <script type="text/javascript" src=https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js></script>
+
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#table_id').dataTable( {
-                "language": {"url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Slovak.json"}
-            } );
+        $('#table_id').dataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         } );
     </script>
+
 </head>
 <body>
 <nav class="navbar navbar-default">

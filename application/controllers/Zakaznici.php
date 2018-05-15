@@ -126,4 +126,24 @@ class Zakaznici extends CI_Controller {
         }
         redirect('zakaznici/');
     }
+
+
+    public function json_zakaznici() {
+        $responce = nil;
+        foreach($data as $row)
+        {
+            $responce->rows[]["c"] = array(
+                array(
+                    "v" => $row['fullname'],
+                    "f" => null
+                ) ,
+                array(
+                    "v" => (int)$row['pocet'],
+                    "f" => null
+                )
+            );
+        }
+        echo json_encode($responce);
+    }
+
 }
