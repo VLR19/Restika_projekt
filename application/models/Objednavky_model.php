@@ -57,4 +57,17 @@ class Objednavky_model extends CI_Model
         $delete = $this->db->delete('objednavky', array('idObjednavky' => $id));
         return $delete ? true : false;
     }
+
+
+
+    public function record_objednavky_array() {
+        $this->db->select('count (objednavky.Suma) as celkova_platba, rezervacia.idRezervacia as pocet')
+            ->join('objednavky','objednavky.Rezervacia_idRezervacia = rezervacia.idRezervacia');
+        $this->db->group_by('rezervacia.idRezervacia');
+        $this->db->from('rezervacia');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
+
+

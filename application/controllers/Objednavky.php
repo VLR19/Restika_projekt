@@ -12,6 +12,8 @@ class Objednavky extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('Objednavky_model');
+
+        $this->load->library('pagination');
     }
 
     public function index(){
@@ -33,7 +35,7 @@ class Objednavky extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    // Zobrazenie detailu o teplote
+
     public function view($id){
         $data = array();
         //kontrola, ci bolo zaslane id riadka
@@ -122,4 +124,26 @@ class Objednavky extends CI_Controller {
         }
         redirect('objednavky/');
     }
+
+
+    public function json_objednavky() {
+        $responce = nil;
+        foreach($data as $row)
+        {
+            $responce->rows[]["c"] = array(
+                array(
+                    "v" => $row['celkova_platba'],
+                    "f" => null
+                ) ,
+                array(
+                    "v" => (int)$row['pocet'],
+                    "f" => null
+                )
+            );
+        }
+        echo json_encode($responce);
+    }
+
+
+
 }
